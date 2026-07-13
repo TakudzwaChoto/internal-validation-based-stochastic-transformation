@@ -1,0 +1,12 @@
+﻿data/
+checkpoints/
+__pycache__/
+*.pyc
+*.log
+*.json
+*.png
+*.pdf
+*.pt
+*.tar.gz
+eval_logs/
+.DS_Store
