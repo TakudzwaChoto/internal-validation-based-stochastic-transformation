@@ -1,10 +1,10 @@
-# Internal-Validation-Based-Stochastic-Transformation
+# E-PURIFIER: Internal-Validation-Based Stochastic Transformation for Reducing Membership Inference Distinguishability
 
 Privacy Defense Framework against Membership Inference Attacks
 
 ## Overview
 
-This repository implements a comprehensive privacy defense framework that protects deployed machine learning models from membership inference attacks through efficient post-processing techniques. The framework combines multiple innovations, including LSH-based member detection, reference-free CVAE confidence transformation, and mutual information bounds.
+This repository implements E-PURIFIER, a comprehensive privacy defense framework that protects deployed machine learning models from membership inference attacks through efficient post-processing techniques. E-PURIFIER extends the original PURIFIER framework by addressing four critical limitations: excessive inference overhead (67×), dependency on external reference datasets, absence of quantifiable privacy diagnostics, and vulnerability to adaptive attacks.
 
 ## Features
 
@@ -128,9 +128,9 @@ e-purifier/
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{your_paper,
-  title={Internal-Validation-Based-Stochastic-Transformation},
-  author={Your Name},
+@article{choto2024epurifier,
+  title={E-PURIFIER: Internal-Validation-Based Stochastic Transformation for Reducing Membership Inference Distinguishability},
+  author={Choto, Takudzwa and Huang, Xiaofang and Odoom, Justice and Min, Fan and Banda, William and Xiao, Ruifeng and Lei, Hongxia and Wang, Chengran and Seid, Muhammed Ahmed},
   journal={IEEE Transactions on Information Forensics and Security},
   year={2024}
 }
