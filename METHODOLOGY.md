@@ -1,4 +1,4 @@
-# Methodology Details for TIFS Deep Learning Submission
+# Methodology Details for Deep Learning 
 
 ## Network Topology
 
