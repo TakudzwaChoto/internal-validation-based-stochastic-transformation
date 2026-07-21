@@ -670,12 +670,12 @@ def load_purchase100():
     for i in range(n_classes):
         mask = np.random.choice(n_samples, n_samples // n_classes, replace=False)
         y[mask] = i
-        signal_strength = 40.0  # Balanced for 80%+ training accuracy with good defense
+        signal_strength = 40.0 
         X[mask, i*6:(i+1)*6] += np.random.randn(len(mask), 6) * signal_strength
+    # Add noise for generalization
+    X += np.random.randn(n_samples, n_features) * 0.2  
     
-    X += np.random.randn(n_samples, n_features) * 0.2  # Add noise for generalization
-    
-    # Minimal label noise
+    # label noise
     noise_mask = np.random.choice(n_samples, int(n_samples * 0.01), replace=False)
     y[noise_mask] = np.random.randint(0, n_classes, len(noise_mask))
     
@@ -697,7 +697,7 @@ def load_facescrub530():
     X = np.random.randn(n_samples, n_features).astype(np.float32)
     y = np.random.randint(0, n_classes, n_samples)
     
-    # Much weaker signal for proper learning (85-95% accuracy)
+    #Signal for proper learning 
     for i in range(n_classes):
         mask = y == i
         if np.sum(mask) > 0:
@@ -730,7 +730,7 @@ def load_texas100():
     X = np.random.randn(n_samples, n_features).astype(np.float32)
     y = np.random.randint(0, n_classes, n_samples)
     
-    # Much weaker signal for proper learning
+    #Signal for proper learning
     for i in range(n_classes):
         mask = y == i
         if np.sum(mask) > 0:
@@ -795,13 +795,13 @@ def load_utkface():
     X = np.random.randn(n_samples, n_features).astype(np.float32)
     y = np.random.randint(0, n_classes, n_samples)
     
-    # Weaker race patterns for realistic learning
+    # Race patterns for realistic learning
     race_patterns = {
-        0: np.random.randn(12) * 2.0,  # Reduced from 3.0
-        1: np.random.randn(12) * 2.1,  # Reduced from 3.2
-        2: np.random.randn(12) * 1.8,  # Reduced from 2.8
-        3: np.random.randn(12) * 2.0,  # Reduced from 3.1
-        4: np.random.randn(12) * 1.7   # Reduced from 2.7
+        0: np.random.randn(12) * 2.0,  
+        1: np.random.randn(12) * 2.1,  
+        2: np.random.randn(12) * 1.8,  
+        3: np.random.randn(12) * 2.0,  
+        4: np.random.randn(12) * 1.7   
     }
     
     for race in range(n_classes):
@@ -843,7 +843,7 @@ def train_model(model, train_loader, test_loader, epochs=35):
         epoch_loss = 0
         batch_count = 0
         
-        for x, y in tqdm(train_loader, desc=f"          Epoch {epoch+1}/{epochs}", leave=False):
+        for x, y in tqdm(train_loader, desc=f" Epoch {epoch+1}/{epochs}", leave=False):
             opt.zero_grad()
             outputs = model(x)
             loss = criterion(outputs, y)
@@ -1075,7 +1075,7 @@ def run_single_dataset_enhanced(name, load_fn, data_type, num_classes, epochs=35
     return full_results
 
 # ============================================================================
-# PART 8: FEDERATED LEARNING IMPLEMENTATION
+# PART 8: FEDERATED LEARNING 
 # ============================================================================
 
 class FLClient:
@@ -1224,7 +1224,7 @@ def run_federated_learning(name, load_fn, data_type, num_classes, num_clients=10
     print(f"{'='*60}")
     
     # Load data
-    print("  Loading data...")
+    print(" Loading data...")
     trainset, testset, _, _ = load_fn()
     test_loader = DataLoader(testset, batch_size=32, shuffle=False)
     print(f"    Train: {len(trainset)}, Test: {len(testset)}, Classes: {num_classes}")
@@ -1246,7 +1246,7 @@ def run_federated_learning(name, load_fn, data_type, num_classes, num_clients=10
         input_dim = None
     
     # Initialize global model
-    print("  Initializing global model...")
+    print(" Initializing global model...")
     global_model = create_model(name, input_dim, num_classes)
     
     # Initialize server
@@ -1352,9 +1352,9 @@ def run_single_dataset(name, load_fn, data_type, num_classes, epochs=35):
     start = time.time()
     model, acc, history = train_model(model, train_loader, test_loader, epochs=epochs)
     train_time = time.time() - start
-    print(f"    âœ“ Train Accuracy: {history['train_acc'][-1]:.2f}%")
-    print(f"    âœ“ Test Accuracy: {acc:.2f}%")
-    print(f"    âœ“ Training time: {train_time/60:.1f} min")
+    print(f" âœ“ Train Accuracy: {history['train_acc'][-1]:.2f}%")
+    print(f" âœ“ Test Accuracy: {acc:.2f}%")
+    print(f" âœ“ Training time: {train_time/60:.1f} min")
     
     # Plot training curves
     plot_training_curves(history, name, save_path=f'{name.lower()}_training_curves.png')
@@ -1365,16 +1365,16 @@ def run_single_dataset(name, load_fn, data_type, num_classes, epochs=35):
     defense = EPurifier(model, num_classes, dataset_key=slug)
     defense.train(trainset)
     defense_time = time.time() - start
-    print(f"    âœ“ Defense training: {defense_time/60:.1f} min")
+    print(f" âœ“ Defense training: {defense_time/60:.1f} min")
     
     # Evaluate
     print(f"\n  Evaluating defense...")
     attack_acc = evaluate_attack(defense, test_loader)
-    print(f"    âœ“ Attack success: {attack_acc:.2f}% (target: 50%)")
+    print(f" âœ“ Attack success: {attack_acc:.2f}% (target: 50%)")
     
     # MI bound
     mi_bound = defense.get_mi_bound(test_loader)
-    print(f"    âœ“ MI Bound: {mi_bound:.4f} nats")
+    print(f" âœ“ MI Bound: {mi_bound:.4f} nats")
     
     # Get final training accuracy from history
     final_train_acc = history['train_acc'][-1]
@@ -1499,7 +1499,7 @@ def main_enhanced():
     # Final summary
     print("\n" + "="*70)
     if args.federated:
-        print("FEDERATED LEARNING SUMMARY - ALL DATASETS")
+        print("FEDERATED LEARNING - ALL DATASETS")
         print("="*70)
         print(f"{'Dataset':<15} {'Mode':<10} {'Test Acc':<11} {'Attack Success':<15} {'Comm Overhead':<12}")
         print(f"-------------------------------------------------------------------------")
@@ -1513,7 +1513,7 @@ def main_enhanced():
         print(f"{'AVERAGE':<15} {'':<10} {avg_test:<11.2f} {avg_attack:<16.2f} {avg_comm:<12.2f}x")
     else:
         if args.comprehensive:
-            print("COMPREHENSIVE EVALUATION SUMMARY - ALL DATASETS")
+            print("COMPREHENSIVE EVALUATION - ALL DATASETS")
         else:
             print("FINAL SUMMARY - ALL DATASETS")
         print("="*70)
