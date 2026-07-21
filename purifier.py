@@ -25,7 +25,7 @@ import argparse
 import json
 import os
 import matplotlib
-matplotlib.use('Agg')  # Non-interactive backend
+matplotlib.use('Agg')  
 import matplotlib.pyplot as plt
 from comprehensive_evaluation import ComprehensiveEvaluator
 
@@ -166,7 +166,7 @@ def plot_results_summary(results, save_path='results_summary.png'):
     
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
     
-    # Test accuracy bar chart
+    # Test accuracy 
     colors = ['#2ecc71' if a >= 95 else '#e74c3c' for a in test_accuracies]
     bars1 = ax1.bar(datasets, test_accuracies, color=colors, edgecolor='black', linewidth=1.5)
     ax1.axhline(y=95, color='orange', linestyle='--', linewidth=2, label='Target (95%)')
@@ -210,9 +210,10 @@ def plot_results_summary(results, save_path='results_summary.png'):
     print(f"\nâœ“ Saved results summary to {save_path}")
 
 # ============================================================================
-# PART 1: SIMPLE WORKING MODELS (NO DENSENET COMPLEXITY)
+# PART 1: MODELS 
 # ============================================================================
-class SimpleCNN(nn.Module):
+
+class CNN(nn.Module):
     """Ultra-Strong CNN for CIFAR - 95%+ accuracy"""
     def __init__(self, num_classes=10):
         super().__init__()
@@ -258,7 +259,7 @@ class SimpleCNN(nn.Module):
         return self.fc2(x)
 
 
-class SimpleMLP(nn.Module):
+class MLP(nn.Module):
     """Regularized MLP for tabular data - prevents overfitting"""
     def __init__(self, input_dim, num_classes):
         super().__init__()
@@ -278,9 +279,9 @@ class SimpleMLP(nn.Module):
 
 def create_model(dataset_name, input_dim, num_classes):
     if dataset_name.lower() in ['cifar10', 'cifar100']:
-        return SimpleCNN(num_classes)
+        return CNN(num_classes)
     else:
-        return SimpleMLP(input_dim, num_classes)
+        return MLP(input_dim, num_classes)
 
 
 # ============================================================================
@@ -377,7 +378,7 @@ class MemberDetector:
 # PART 3: INNOVATION 2 - REFERENCE-FREE CVAE
 # ============================================================================
 
-class SimpleCVAE(nn.Module):
+class CVAE(nn.Module):
     def __init__(self, input_dim, num_classes):
         super().__init__()
         self.num_classes = num_classes
@@ -458,7 +459,7 @@ class EPurifier:
         self.mi_estimator = None
     
     def train(self, train_dataset):
-        print("        Extracting confidence scores...")
+        print("Extracting confidence scores...")
         self.target_model.eval()
         loader = DataLoader(train_dataset, batch_size=256, shuffle=False)
         confs, labels = [], []
@@ -480,15 +481,15 @@ class EPurifier:
         val_confs = confs[idx[:n_val]]
         val_labels = labels[idx[:n_val]]
         
-        print(f"          Members: {len(member_confs)}, Validation: {len(val_confs)}")
+        print(f" Members: {len(member_confs)}, Validation: {len(val_confs)}")
         
         # Train detector
-        print("        Training LSH + TinyMLP detector...")
+        print("Training LSH + TinyMLP detector...")
         self.detector = MemberDetector()
         self.detector.fit(member_confs, val_confs[:3000])
         
         # Train CVAE
-        print("        Training reference-free CVAE...")
+        print("Training reference-free CVAE...")
         self.cvae = SimpleCVAE(self.num_classes, self.num_classes)
         val_tensor = torch.FloatTensor(val_confs)
         val_labels_tensor = torch.LongTensor(val_labels)
@@ -507,11 +508,11 @@ class EPurifier:
                 opt.step()
                 total_loss += loss.item()
             if epoch % 15 == 0:
-                print(f"          CVAE Epoch {epoch}: Loss={total_loss:.4f}")
+                print(f"  CVAE Epoch {epoch}: Loss={total_loss:.4f}")
         
         # MI estimator
         self.mi_estimator = MIEstimator(self.num_classes)
-        print("        Defense training complete!")
+        print(" Defense training complete!")
     
     def defend(self, x):
         with torch.no_grad():
