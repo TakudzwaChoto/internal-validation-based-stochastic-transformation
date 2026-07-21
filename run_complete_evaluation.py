@@ -5,7 +5,7 @@ Complete Evaluation Runner
 ================================================================================
 Combines basic results and comprehensive evaluation metrics
 
-BASIC RESULTS:
+RESULTS:
 - Train Accuracy, Test Accuracy, Attack Success Rate, MI Bound
 - Training curves, Sample visualizations, Summary plots, JSON results
 
@@ -29,7 +29,7 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
-# Import basic functionality from purifier
+# Import functionality from purifier
 from purifier import (
     run_single_dataset, create_model, train_model, EPurifier,
     ArrayDataset, DataLoader
@@ -109,7 +109,7 @@ def run_complete_evaluation(dataset_name='all', epochs=40):
             elif load_func_name == 'load_utkface':
                 load_func = purifier.load_utkface
             
-            # Step 1: Run basic evaluation (from purifier.py)
+            # Step 1: Run evaluation (from purifier.py)
             print("  Step 1: Basic evaluation...")
             basic_result = run_single_dataset(display_name, load_func, data_type, num_classes, epochs)
             
