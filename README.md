@@ -139,12 +139,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Results may vary slightly due to random seed initialization, even with fixed seeds
 - Expected variance: ±0.5% for attack success rates, ±0.3% for test accuracy
 - This is normal and within statistical significance thresholds
-- All results in the paper are averaged over 5 runs with different seeds (42, 123, 456, 789, 101)
+- All results reported are averaged over 5 runs with different seeds (42, 123, 456, 789, 101)
 
 **Hardware Differences**
 - GPU vs CPU training may cause minor numerical differences
 - Different GPU architectures (RTX 4090 vs others) may produce slight variations
-- Results should remain within confidence intervals reported in the paper
+- Results should remain within confidence intervals reported. 
 
 **Software Version Compatibility**
 - PyTorch versions may cause slight numerical differences
@@ -188,7 +188,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ### Reproducibility Checklist
 
-To reproduce results exactly as in the paper:
+To reproduce exact results:
 
 1. **Environment Setup**
    - Python 3.8+
@@ -204,12 +204,12 @@ To reproduce results exactly as in the paper:
 3. **Data Preparation**
    - Use standard dataset splits (80% train, 20% test)
    - For defense training, use 10% of training data as validation
-   - Ensure data preprocessing matches paper (normalization, augmentation)
+   - Ensure data preprocessing matches (normalization, augmentation)
 
 4. **Running Experiments**
    - Run each experiment 5 times with different seeds
    - Report mean ± standard deviation
-   - Compare against confidence intervals in paper
+  
 
 ### Contact for Reproducibility Issues
 
