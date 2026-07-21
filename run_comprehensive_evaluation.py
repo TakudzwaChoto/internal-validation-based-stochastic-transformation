@@ -68,7 +68,7 @@ def main():
     print(f"Quick Test: {'ENABLED' if args.quick_test else 'DISABLED'}")
     print("="*80)
     
-    # Adjust epochs for quick test
+    # Adjust epochs for test
     if args.quick_test:
         args.epochs = min(args.epochs, 10)
         print("Quick test mode: Using reduced epochs for faster execution")
