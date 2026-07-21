@@ -214,7 +214,7 @@ def plot_results_summary(results, save_path='results_summary.png'):
 # ============================================================================
 
 class CNN(nn.Module):
-    """Ultra-Strong CNN for CIFAR - 95%+ accuracy"""
+    """Ultra-Strong CNN for CIFAR"""
     def __init__(self, num_classes=10):
         super().__init__()
         # Much stronger for 100 classes
