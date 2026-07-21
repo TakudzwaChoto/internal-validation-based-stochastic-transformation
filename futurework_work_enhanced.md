@@ -1,10 +1,10 @@
-# Enhanced Future Work Section for E-PURIFIER Paper
+# Enhanced Future Work 
 
 ## G. Future Work Priorities
 
 Based on the limitations identified in Section IX-E, we recommend the following priorities for future work to advance E-PURIFIER toward stronger theoretical foundations and broader applicability.
 
-### Immediate Priorities (Short-term: 1-3 months)
+### Immediate Priorities 
 
 **1. Certified Empirical Privacy with Confidence Intervals**
 - Develop statistical confidence bounds on MI estimates using bootstrap resampling
@@ -30,8 +30,7 @@ Based on the limitations identified in Section IX-E, we recommend the following 
 - **Impact**: Demonstrates FL extension's robustness across realistic scenarios
 - **Feasibility**: Computational cost but straightforward implementation
 
-### Medium-Term Directions (3-6 months)
-
+### Medium-Term Directions 
 **4. Stronger Adaptive Attack Evaluation**
 - Evaluate against attackers with unlimited query budgets
 - Test with larger shadow model ensembles (50+ models)
@@ -57,7 +56,7 @@ Based on the limitations identified in Section IX-E, we recommend the following 
 - **Impact**: Novel contribution bridging empirical and formal privacy
 - **Feasibility**: Requires methodological innovation
 
-### Long-Term Directions (6-12 months)
+### Long-Term Directions 
 
 **7. Real-World Deployment Studies**
 - Deploy E-PURIFIER in production cloud ML APIs
@@ -148,7 +147,7 @@ Based on the limitations identified in Section IX-E, we recommend the following 
 
 ## Summary
 
-The future work outlined above represents a comprehensive roadmap for advancing E-PURIFIER from its current strong empirical foundation (8/10) toward a theoretically grounded, broadly applicable, and formally certified privacy defense framework (9.8/10). The immediate priorities focus on addressing the most significant limitations identified in our evaluation, while medium and long-term directions expand the scope and impact of the framework.
+The future work outlined above represents a comprehensive roadmap for advancing E-PURIFIER from its current strong empirical foundation toward a theoretically grounded, broadly applicable, and formally certified privacy defense framework. The immediate priorities focus on addressing the most significant limitations identified in our evaluation, while medium and long-term directions expand the scope and impact of the framework.
 
 The key themes across all future work are:
 - **Certification**: Moving from empirical to certified privacy guarantees
