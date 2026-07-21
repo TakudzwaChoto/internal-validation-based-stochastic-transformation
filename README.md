@@ -74,14 +74,12 @@ python run_complete_evaluation.py --dataset cifar10
 e-purifier/
 ├── purifier.py                    # Main implementation
 ├── comprehensive_evaluation.py    # Attack evaluation module
-├── results_table_generator.py     # Results visualization
 ├── run_fl_evaluation.ps1          # FL evaluation script
 ├── run_one_dataset.ps1            # Single dataset evaluation
 ├── run_comprehensive_evaluation.py # Comprehensive evaluation runner
 ├── run_complete_evaluation.py     # Complete evaluation runner
-├── figs.py                        # Figure generation
-├── METHODOLOGY_TIFS.md            # Detailed methodology documentation
-├── FUTURE_WORK_ENHANCED.md         # Future work directions
+├── methodology.md            # Detailed methodology documentation
+├── future_work_enhanced.md         # Future work directions
 └── README.md                      # This file
 ```
 
@@ -123,18 +121,6 @@ e-purifier/
 | CIFAR10  | IID     | 91.2%    | 47.8%          | 1.2×            |
 | CIFAR10  | Non-IID | 90.8%    | 49.1%          | 1.3×            |
 
-## Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@article{choto2024epurifier,
-  title={E-PURIFIER: Internal-Validation-Based Stochastic Transformation for Reducing Membership Inference Distinguishability},
-  author={Choto, Takudzwa and Huang, Xiaofang and Odoom, Justice and Min, Fan and Banda, William and Xiao, Ruifeng and Lei, Hongxia and Wang, Chengran and Seid, Muhammed Ahmed},
-  journal={IEEE Transactions on Information Forensics and Security},
-  year={2024}
-}
-```
 
 ## License
 
@@ -185,7 +171,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Note: Results may vary with fewer epochs
 
 **Issue: Attack Success Rate Differs Significantly**
-- Check that random seed is set correctly (default: 42)
+- Check that the random seed is set correctly (default: 42)
 - Verify dataset split matches paper (80/20 train/test)
 - Ensure defense hyperparameters match DEFENSE_PROFILES in Config
 - Try running multiple times and averaging results
@@ -198,7 +184,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 **Issue: Import Errors**
 - Solution: Install all dependencies: `pip install -r requirements.txt`
 - Ensure Python version is 3.8 or higher
-- Check that PyTorch is installed with CUDA support if using GPU
+- Check that PyTorch is installed with CUDA support if using a GPU
 
 ### Reproducibility Checklist
 
